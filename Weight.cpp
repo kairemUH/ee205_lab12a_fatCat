@@ -21,6 +21,7 @@
 
 #define FORMAT_LINE( className, member ) std::cout << std::setw(8) << (className) << std::setw(20) << (member) << std::setw(52)
 
+
 ////////////////////  Constructors  ////////////////////
 
 Weight::Weight() noexcept {
