@@ -242,9 +242,33 @@ float Weight::convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeigh
 
 ////////////////////  Operator  ////////////////////
 
-//bool operator==(const Weight &rhs_Weight) const;
-//bool operator<(const Weight &rhs_Weight) const;
-//Weight & operator+=(float rhs_addToWeight);
+bool Weight::operator==( const Weight& rhs_Weight ) const {
+    /// Remember to convert the two weight's units into a common unit!
+    /// Treat unknown weights as 0 (so we can sort them without dealing
+    /// with exceptions)
+    float lhs_weight = (bIsKnown) ? getWeight(Weight::POUND) : 0;
+    float rhs_weight = (rhs_Weight.bIsKnown) ? rhs_Weight.getWeight(Weight::POUND) : 0;
+    return lhs_weight == rhs_weight;
+}
+
+bool Weight::operator<(const Weight &rhs_Weight) const {
+
+    float lhs_weight = (bIsKnown) ? getWeight(Weight::POUND) : 0;
+    float rhs_weight = (rhs_Weight.bIsKnown) ? rhs_Weight.getWeight(Weight::POUND) : 0;
+    return lhs_weight < rhs_weight;
+
+}
+
+Weight & Weight::operator+=(float rhs_addToWeight) {
+
+    if ( ! Weight::bIsKnown ) {
+        throw std::out_of_range( "Cannot add to unknown weight." );
+    }
+
+    Weight::weight += rhs_addToWeight;
+    return *this;
+
+}
 
 std::ostream& operator<<( std::ostream& lhs_stream
         ,const Weight::UnitOfWeight rhs_UnitOfWeight ) {
