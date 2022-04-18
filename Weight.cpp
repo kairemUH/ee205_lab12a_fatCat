@@ -243,12 +243,14 @@ float Weight::convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeigh
 ////////////////////  Operator  ////////////////////
 
 bool Weight::operator==( const Weight& rhs_Weight ) const {
+
     /// Remember to convert the two weight's units into a common unit!
     /// Treat unknown weights as 0 (so we can sort them without dealing
-    /// with exceptions)
+    /// with exceptions).
     float lhs_weight = (bIsKnown) ? getWeight(Weight::POUND) : 0;
     float rhs_weight = (rhs_Weight.bIsKnown) ? rhs_Weight.getWeight(Weight::POUND) : 0;
     return lhs_weight == rhs_weight;
+
 }
 
 bool Weight::operator<(const Weight &rhs_Weight) const {
@@ -270,8 +272,8 @@ Weight & Weight::operator+=(float rhs_addToWeight) {
 
 }
 
-std::ostream& operator<<( std::ostream& lhs_stream
-        ,const Weight::UnitOfWeight rhs_UnitOfWeight ) {
+std::ostream& operator<<( std::ostream& lhs_stream ,const Weight::UnitOfWeight rhs_UnitOfWeight ) {
+
     switch( rhs_UnitOfWeight ) {
         case Weight::POUND: return lhs_stream << "Pounds" ;
         case Weight::KILO: return lhs_stream << "Kilograms" ;
@@ -279,6 +281,7 @@ std::ostream& operator<<( std::ostream& lhs_stream
         default:
             throw std::out_of_range( "The unit can’t be mapped to a string" );
     }
+
 }
 
 
