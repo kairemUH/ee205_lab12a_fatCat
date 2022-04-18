@@ -48,6 +48,9 @@ int main() {
     firstWeight.dump();
 
 
+    firstWeight += 1.0; // should be ~ 8.54 pounds
+    firstWeight.dump();
+
 
     Weight secondWeight = Weight( 0.4535, Weight::KILO );
     assert( secondWeight.validate() );
@@ -55,6 +58,10 @@ int main() {
     secondWeight.dump();
 
     std::cout << secondWeight.getWeight( Weight::POUND ) << std::endl; // should be ~ 1 pound
+
+
+    Weight thirdWeight = Weight(400);
+    assert( firstWeight < thirdWeight );
 
 
     return 0;
